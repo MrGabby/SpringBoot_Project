@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Crop Deal - Spring Boot Application
 
 This is a Spring Boot application that replicates the .NET Crop Deal backend API.
@@ -117,3 +118,6 @@ The application uses PostgreSQL by default. To configure:
 - Database tables are auto-created on startup (ddl-auto=update)
 - Swagger UI is available for testing all APIs
 - All endpoints follow RESTful conventions
+=======
+# SpringBoot_Project
+>>>>>>> ca80b517b4b41d79f8aabcdc5f639ffc05ec8227
