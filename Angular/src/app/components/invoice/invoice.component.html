@@ -1,0 +1,61 @@
+<div class="container my-5 fade-in">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold text-success">Invoice History</h2>
+      <p class="text-muted">Track your transactions and orders.</p>
+    </div>
+    <button class="btn btn-outline-secondary" onclick="window.print()">
+      <i class="bi bi-printer"></i> Print Report
+    </button>
+  </div>
+
+  <div class="card shadow-sm border-0 overflow-hidden">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr>
+            <th class="py-3 ps-4">Order ID</th>
+            <th class="py-3">Date</th>
+            <th class="py-3">Details</th>
+            <th class="py-3">Parties</th>
+            <th class="py-3 text-end">Amount</th>
+            <th class="py-3 text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of Invoice">
+            <td class="ps-4 fw-bold">#{{item.invoiceid}}</td>
+            <td class="text-muted">{{item.date_created | date:'mediumDate'}}</td>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="avatar-sm bg-success bg-opacity-10 text-success rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                  <i class="bi bi-basket"></i>
+                </div>
+                <div>
+                  <h6 class="mb-0 fw-bold">{{item.crop_Detail?.crop_name || 'Unknown Crop'}}</h6>
+                  <small class="text-muted">{{item.quantity}} kg • {{item.crop_Detail?.crop_type}}</small>
+                </div>
+              </div>
+            </td>
+            <td>
+              <small class="d-block text-muted">Farmer: <span class="fw-bold text-dark">{{item.farmerid}}</span></small>
+              <small class="d-block text-muted">Dealer: <span class="fw-bold text-dark">{{item.dealerid}}</span></small>
+            </td>
+            <td class="text-end fw-bold text-success">₹{{item.price}}</td>
+            <td class="text-center">
+              <span class="badge rounded-pill bg-success bg-opacity-10 text-success px-3 py-2">
+                {{item.status || 'Completed'}}
+              </span>
+            </td>
+          </tr>
+          <tr *ngIf="Invoice.length === 0">
+            <td colspan="6" class="text-center py-5 text-muted">
+              <i class="bi bi-inbox display-4 d-block mb-3"></i>
+              No invoices found.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

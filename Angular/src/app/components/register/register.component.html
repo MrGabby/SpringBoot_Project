@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center align-items-center flex-grow-1 my-5">
+  <div class="card shadow-lg register-container">
+    <div class="card-body p-5">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold" style="color: var(--primary-color);">Create Account</h2>
+        <p class="text-muted">Join Crop Deal today.</p>
+      </div>
+
+      <form #form="ngForm" (ngSubmit)="RegisterUser()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" placeholder="John Doe" name="name" [(ngModel)]="addUser.name" required>
+          </div>
+          <div class="col-md-6 mb-3">
+             <label for="contact" class="form-label">Contact Number</label>
+            <input type="text" class="form-control" id="contact" placeholder="1234567890" name="contact" [(ngModel)]="addUser.contact" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email_id" [(ngModel)]="addUser.email_id" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <input type="text" class="form-control" id="address" placeholder="123 Main St" name="address" [(ngModel)]="addUser.address" required>
+        </div>
+
+        <div class="row">
+           <div class="col-md-6 mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Create a password" name="password" [(ngModel)]="addUser.password" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="role" class="form-label">I am a...</label>
+            <select class="form-select" id="role" name="roles" [(ngModel)]="addUser.roles" required>
+              <option value="" disabled selected>Select Role</option>
+              <option value="Farmer">Farmer</option>
+              <option value="Dealer">Dealer</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+          <button class="btn btn-primary btn-lg" type="submit">Register</button>
+        </div>
+        
+         <div class="text-center mt-3">
+            <p class="small text-muted">Already have an account? <a routerLink="/Login" class="text-decoration-none">Login</a></p>
+         </div>
+      </form>
+    </div>
+  </div>
+</div>

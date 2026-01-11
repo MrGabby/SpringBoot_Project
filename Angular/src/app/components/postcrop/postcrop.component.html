@@ -1,0 +1,100 @@
+<div class="container my-5 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-success text-white p-4 text-center">
+          <h3 class="fw-bold mb-0">Post New Crop</h3>
+          <p class="mb-0 opacity-75">Fill in the details to sell your produce</p>
+        </div>
+        <div class="card-body p-4 p-md-5">
+          <form #form="ngForm" (ngSubmit)="CropPost()" class="needs-validation">
+            
+            <div class="row g-3">
+              <!-- Crop Name -->
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="crop_name" placeholder="Wheat" required
+                         name="crop_name" [(ngModel)]="c.crop_name" #name="ngModel"
+                         [class.is-invalid]="name.invalid && name.touched">
+                  <label for="crop_name">Crop Name</label>
+                  <div class="invalid-feedback">Please enter crop name.</div>
+                </div>
+              </div>
+
+              <!-- Crop Family -->
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="crop_family" placeholder="Grass" required
+                         name="crop_family" [(ngModel)]="c.crop_family" #family="ngModel"
+                         [class.is-invalid]="family.invalid && family.touched">
+                  <label for="crop_family">Crop Family</label>
+                  <div class="invalid-feedback">Please enter crop family.</div>
+                </div>
+              </div>
+
+              <!-- Crop Type -->
+              <div class="col-md-12">
+                <div class="form-floating mb-3">
+                  <select class="form-select" id="crop_type" required
+                          name="crop_type" [(ngModel)]="c.crop_type" #type="ngModel"
+                          [class.is-invalid]="type.invalid && type.touched">
+                    <option value="" disabled selected>Select Type</option>
+                    <option *ngFor="let Role of croptype" [value]="Role">{{Role}}</option>
+                  </select>
+                  <label for="crop_type">Crop Type</label>
+                  <div class="invalid-feedback">Please select a crop type.</div>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="col-12">
+                <div class="form-floating mb-3">
+                  <textarea class="form-control" id="cropDetail_description" placeholder="Description" style="height: 100px" required
+                            name="cropDetail_description" [(ngModel)]="c.cropDetail_description" #desc="ngModel"
+                            [class.is-invalid]="desc.invalid && desc.touched"></textarea>
+                  <label for="cropDetail_description">Description</label>
+                  <div class="invalid-feedback">Please provide a description.</div>
+                </div>
+              </div>
+
+              <!-- Quantity & Price -->
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" id="quantity" placeholder="100" required
+                         name="quantity" [(ngModel)]="c.quantity" #qty="ngModel"
+                         [class.is-invalid]="qty.invalid && qty.touched">
+                  <label for="quantity">Quantity (kg)</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" id="price" placeholder="500" required
+                         name="price" [(ngModel)]="c.price" #price="ngModel"
+                         [class.is-invalid]="price.invalid && price.touched">
+                  <label for="price">Price (₹/kg)</label>
+                </div>
+              </div>
+
+              <!-- Location -->
+              <div class="col-12">
+                <div class="form-floating mb-4">
+                  <input type="text" class="form-control" id="location" placeholder="City" required
+                         name="location" [(ngModel)]="c.location" #loc="ngModel"
+                         [class.is-invalid]="loc.invalid && loc.touched">
+                  <label for="location">Location</label>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="col-12">
+                <button class="btn btn-success w-100 py-3 fw-bold rounded-pill shadow-sm" type="submit" [disabled]="form.invalid">
+                  <i class="bi bi-cloud-upload me-2"></i> Publish Crop
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

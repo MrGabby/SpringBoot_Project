@@ -1,0 +1,46 @@
+<div class="container my-5 fade-in">
+  <div class="row text-center mb-4">
+    <div class="col">
+      <h2 class="fw-bold text-success">Dealer Dashboard</h2>
+      <p class="text-muted">Explore the market and manage your purchases.</p>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    <!-- Browse Market -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card feature-card h-100 shadow-sm border-0">
+        <div class="card-body text-center p-4">
+          <div class="display-4 text-success mb-3"><i class="bi bi-shop"></i></div>
+          <h5 class="card-title fw-bold">Browse Market</h5>
+          <p class="card-text text-muted">View all available crops from farmers and make a purchase.</p>
+          <button routerLink="GetCrop" class="btn btn-outline-success w-100 mt-3 rounded-pill">View Crops</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Invoices -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card feature-card h-100 shadow-sm border-0">
+        <div class="card-body text-center p-4">
+          <div class="display-4 text-success mb-3"><i class="bi bi-receipt"></i></div>
+          <h5 class="card-title fw-bold">My Invoices</h5>
+          <p class="card-text text-muted">Track your purchase history and view invoices.</p>
+          <button routerLink="/Invoice" class="btn btn-outline-success w-100 mt-3 rounded-pill">View Invoices</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card feature-card h-100 shadow-sm border-0">
+        <div class="card-body text-center p-4">
+          <div class="display-4 text-success mb-3"><i class="bi bi-person-circle"></i></div>
+          <h5 class="card-title fw-bold">My Profile</h5>
+          <p class="card-text text-muted">Manage your account details and preferences.</p>
+          <button [routerLink]="['/Users/edit', CurrentUser?.userid]" class="btn btn-outline-success w-100 mt-3 rounded-pill">Update Profile</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

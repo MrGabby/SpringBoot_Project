@@ -1,0 +1,79 @@
+<div class="hero-section mb-5 position-relative">
+  <div class="position-absolute top-0 start-0 w-100 h-100" style="background-image: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1770&auto=format&fit=crop'); background-size: cover; background-position: center; filter: brightness(0.5); z-index: -1;"></div>
+  <div class="container text-white py-5">
+    <div class="row align-items-center min-vh-50 py-5">
+      <div class="col-lg-8">
+        <h1 class="display-3 fw-bold mb-3 fade-in">Welcome to CropDeal</h1>
+        <p class="lead mb-4 fade-in" style="animation-delay: 0.2s;">The easiest way to connect farmers and dealers. Buy and sell fresh crops directly with transparency.</p>
+        <div class="d-flex gap-3 fade-in" style="animation-delay: 0.4s;">
+          <a routerLink="/Register" class="btn btn-success btn-lg px-5 rounded-pill shadow-lg fw-bold">Get Started</a>
+          <a routerLink="/Login" class="btn btn-outline-light btn-lg px-5 rounded-pill fw-bold">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mb-5 fade-in">
+  <div class="row text-center mb-5">
+    <div class="col-lg-8 mx-auto">
+      <h2 class="fw-bold display-6 text-success">Our Features</h2>
+      <p class="text-muted lead">Everything you need to manage your agricultural business efficiently.</p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Sell Crops -->
+    <div class="col-md-4">
+      <div class="card feature-card h-100 shadow-sm border-0">
+        <div class="overflow-hidden position-relative">
+           <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1770&auto=format&fit=crop" class="card-img-top" alt="Sell Crops" style="height: 250px; object-fit: cover;">
+           <div class="card-img-overlay bg-dark bg-opacity-25 d-flex align-items-end transition-opacity">
+           </div>
+        </div>
+        <div class="card-body d-flex flex-column p-4">
+          <div class="mb-3 text-success">
+            <i class="bi bi-shop display-5"></i>
+          </div>
+          <h4 class="card-title fw-bold mb-3">Sell Your Crops</h4>
+          <p class="card-text text-muted mb-4">Reach thousands of dealers and get the best price for your hard work without intermediaries.</p>
+          <button routerLink="/Login" class="btn btn-outline-success w-100 mt-auto rounded-pill fw-bold">Start Selling</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buy Crops -->
+    <div class="col-md-4">
+      <div class="card feature-card h-100 shadow-sm border-0">
+        <div class="overflow-hidden position-relative">
+           <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=1770&auto=format&fit=crop" class="card-img-top" alt="Buy Crops" style="height: 250px; object-fit: cover;">
+        </div>
+        <div class="card-body d-flex flex-column p-4">
+           <div class="mb-3 text-success">
+            <i class="bi bi-cart-check display-5"></i>
+          </div>
+          <h4 class="card-title fw-bold mb-3">Buy Fresh Crops</h4>
+          <p class="card-text text-muted mb-4">Browse through a wide variety of fresh crops available directly from farmers.</p>
+          <button routerLink="/Login" class="btn btn-outline-success w-100 mt-auto rounded-pill fw-bold">View Listings</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manage Invoices -->
+    <div class="col-md-4">
+      <div class="card feature-card h-100 shadow-sm border-0">
+        <div class="overflow-hidden position-relative">
+           <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1770&auto=format&fit=crop" class="card-img-top" alt="Invoices" style="height: 250px; object-fit: cover;">
+        </div>
+        <div class="card-body d-flex flex-column p-4">
+           <div class="mb-3 text-success">
+            <i class="bi bi-file-earmark-text display-5"></i>
+          </div>
+          <h4 class="card-title fw-bold mb-3">Manage Invoices</h4>
+          <p class="card-text text-muted mb-4">Keep track of all your transactions, generate invoices, and manage finances.</p>
+          <button routerLink="/Invoice" class="btn btn-outline-success w-100 mt-auto rounded-pill fw-bold">Check Invoices</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

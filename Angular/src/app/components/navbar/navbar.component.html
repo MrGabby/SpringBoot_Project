@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--primary-color);">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/">
+      Crop Deal
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/welcomepage">Home</a>
+        </li>
+        
+        <!-- Guest Links -->
+        <ng-container *ngIf="!CurrentUser">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/Login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/Register">Register</a>
+          </li>
+        </ng-container>
+
+        <!-- Authenticated Links -->
+        <ng-container *ngIf="CurrentUser">
+          <li class="nav-item" *ngIf="CurrentUser.roles === 'Admin'">
+            <a class="nav-link" routerLinkActive="active" routerLink="/Users">Admin</a>
+          </li>
+          <li class="nav-item" *ngIf="CurrentUser.roles === 'Dealer'">
+             <a class="nav-link" routerLinkActive="active" routerLink="/Dealer">Dealer</a>
+          </li>
+           <li class="nav-item" *ngIf="CurrentUser.roles === 'Farmer'">
+             <a class="nav-link" routerLinkActive="active" routerLink="/Farmer">Farmer</a>
+          </li>
+          
+          <li class="nav-item" *ngIf="CurrentUser.roles === 'Admin'">
+            <a class="nav-link" routerLinkActive="active" routerLink="/Invoice">Invoice</a>
+          </li>
+          
+          <li class="nav-item ms-lg-3">
+             <button (click)="logout()" class="btn btn-light btn-sm rounded-pill px-3 fw-bold text-success">Logout</button>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</nav>

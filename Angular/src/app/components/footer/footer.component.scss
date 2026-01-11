@@ -1,0 +1,11 @@
+.s {
+  background-color: #000000;
+  padding: 30px 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* Remove fixed height and margin to allow flexbox sticky footer to work */
+footer {
+  width: 100%;
+}
