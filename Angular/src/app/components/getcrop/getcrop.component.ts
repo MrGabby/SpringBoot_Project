@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { invoice } from 'src/app/models/invoice.model';
 import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-getcrop',
@@ -24,8 +25,10 @@ export class GetcropComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private invoiceService: InvoiceService,
-    private cartService: CartService
+    private cartService: CartService,
+    private notification: NotificationService
   ) { }
+
 
   ngOnInit(): void {
     this.loadCrops();
@@ -138,32 +141,42 @@ export class GetcropComponent implements OnInit {
     const newInvoice: invoice = {
       invoiceid: 0,
       userid: this.currentUser.userid,
-      farmerid: 0,
-      dealerid: 0,
-      quantity: '1',
-      price: crop.price,
-      payment_Mode: 'COD',
-      status: 'Pending',
-      crop_detailid: crop.cropDetailid,
+      dealerid: this.currentUser.userid,
+      total_amount: crop.price,
+      total_items: 1,
+      payment_mode: 'COD',
+      status: 'Paid',
       date_created: new Date().toISOString(),
-      crop_Detail: {
+      items: [{
+        id: 0,
+        invoiceId: 0,
         crop_detailid: crop.cropDetailid,
-        crop_name: crop.crop_name,
-        cropDetail_description: crop.cropDetail_description,
-        crop_type: crop.crop_type,
-        quantity: crop.quantity,
+        quantity: 1,
         price: crop.price,
-        location: crop.location
-      }
+        farmerid: 0, // Backend resolves this
+        crop_Detail: {
+          crop_detailid: crop.cropDetailid,
+          crop_name: crop.crop_name,
+          cropDetail_description: crop.cropDetail_description,
+          crop_type: crop.crop_type,
+          quantity: crop.quantity,
+          price: crop.price,
+          location: crop.location
+        }
+      }]
     };
 
     this.invoiceService.createInvoice(newInvoice).subscribe({
       next: (res) => {
+        this.notification.success('Purchase successful! Your harvest is on its way.', 'Done!');
         this.router.navigate(['/Invoice']);
       },
       error: (err) => {
         console.error(err);
+        this.notification.error('Something went wrong during the purchase.', 'Oops!');
       }
     });
   }
 }
+
+

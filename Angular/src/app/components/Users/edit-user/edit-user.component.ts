@@ -16,7 +16,7 @@ import { UsersService } from 'src/app/services/users.service';
 // })
 export class EditUserComponent {
 
-  user: User={
+  user: User = {
     userid: '',
     name: '',
     contact: '',
@@ -24,46 +24,56 @@ export class EditUserComponent {
     address: '',
     roles: '',
     password: '',
-    is_subscribe: false
+    is_subscribe: false,
+    is_active: true
   }
 
-  CurrentUser!:User
-  constructor(private route: ActivatedRoute,private service:UsersService,private router:Router,private auth:AuthService) {
+  CurrentUser!: User
+  constructor(private route: ActivatedRoute, private service: UsersService, private router: Router, private auth: AuthService) {
 
 
-      this.auth.getCurrentUser().subscribe({next:(user)=>{
+    this.auth.getCurrentUser().subscribe({
+      next: (user) => {
         this.CurrentUser = user
         console.log(this.CurrentUser)
       }
-     });
+    });
 
   }
 
-    ngOnInit(): void {
-     this.route.paramMap.subscribe({next: params => {
-      const id = params.get('id');
+  ngOnInit(): void {
+    this.route.paramMap.subscribe({
+      next: params => {
+        const id = params.get('id');
 
-      if(id){
-        this.service.getuser(id).subscribe({ next: (response) => {
-          this.user =response;
+        if (id) {
+          this.service.getuser(id).subscribe({
+            next: (response) => {
+              this.user = response;
+            }
+          });
+
         }
-      });
+      }
+    });
 
-     }}});
-
-    }
+  }
   UpdateUser() {
-     this.service.UpdateUser(this.user.userid,this.user).subscribe({next:(response)=>{
-      this.router.navigate(['Users']);
-     }})
+    this.service.UpdateUser(this.user.userid, this.user).subscribe({
+      next: (response) => {
+        this.router.navigate(['Users']);
+      }
+    })
   }
 
-deleteUser(id:number):void {
- this.service.DeleteUser(id).subscribe({next: (response)=>{
-  this.router.navigate(['Users']);
- }});
+  deleteUser(id: number): void {
+    this.service.DeleteUser(id).subscribe({
+      next: (response) => {
+        this.router.navigate(['Users']);
+      }
+    });
 
+  }
 }
-  }
 
 

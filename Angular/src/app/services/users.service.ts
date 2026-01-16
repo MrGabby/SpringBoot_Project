@@ -13,8 +13,8 @@ export class UsersService {
 
   baseUrl: string = environment.baseUrl;
 
- ChnageUser?: User
- token = localStorage.getItem("token");
+  ChnageUser?: User
+  token = localStorage.getItem("token");
 
   constructor(private http: HttpClient) { }
 
@@ -31,21 +31,25 @@ export class UsersService {
   getallusers(): Observable<User[]> {
     return this.http.get<User[]>(this.baseUrl + '/api/User', this.getHttpOptions());
   }
-  getuser(id:string): Observable<User> {
+  getuser(id: string): Observable<User> {
     return this.http.get<User>(this.baseUrl + '/api/User/' + id, this.getHttpOptions());
   }
 
-  UpdateUser(id:number, req:User):Observable<User> {
+  UpdateUser(id: number, req: User): Observable<User> {
     return this.http.put<User>(this.baseUrl + '/api/User/' + id, req, this.getHttpOptions());
-      }
+  }
 
-  DeleteUser(id:number):Observable<User> {
+  DeleteUser(id: number): Observable<User> {
     return this.http.delete<User>(this.baseUrl + '/api/User/' + id, this.getHttpOptions());
-      }
+  }
 
-      GetUserByToken(): Observable<User> {
-        return this.http.get<User>(this.baseUrl + '/api/Auth/GetUserByToken', this.getHttpOptions());
-      }
+  AddUser(req: User): Observable<User> {
+    return this.http.post<User>(this.baseUrl + '/api/User', req, this.getHttpOptions());
+  }
+
+  GetUserByToken(): Observable<User> {
+    return this.http.get<User>(this.baseUrl + '/api/Auth/GetUserByToken', this.getHttpOptions());
+  }
 
 
 }

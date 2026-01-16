@@ -1,61 +1,79 @@
-<div class="container my-5 fade-in">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h2 class="fw-bold text-success">Invoice History</h2>
-      <p class="text-muted">Track your transactions and orders.</p>
+<div class="invoice-history-container py-5">
+  <div class="container">
+    <div class="header-section mb-5 text-center fade-in">
+      <h2 class="display-5 fw-bold text-dark mb-2">Invoice History</h2>
+      <p class="text-muted">Review all your past transactions and order details in one place.</p>
+      <div class="h-line mx-auto"></div>
     </div>
-    <button class="btn btn-outline-secondary" onclick="window.print()">
-      <i class="bi bi-printer"></i> Print Report
-    </button>
-  </div>
 
-  <div class="card shadow-sm border-0 overflow-hidden">
-    <div class="table-responsive">
-      <table class="table table-hover align-middle mb-0">
-        <thead class="bg-light">
-          <tr>
-            <th class="py-3 ps-4">Order ID</th>
-            <th class="py-3">Date</th>
-            <th class="py-3">Details</th>
-            <th class="py-3">Parties</th>
-            <th class="py-3 text-end">Amount</th>
-            <th class="py-3 text-center">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of Invoice">
-            <td class="ps-4 fw-bold">#{{item.invoiceid}}</td>
-            <td class="text-muted">{{item.date_created | date:'mediumDate'}}</td>
-            <td>
-              <div class="d-flex align-items-center">
-                <div class="avatar-sm bg-success bg-opacity-10 text-success rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                  <i class="bi bi-basket"></i>
-                </div>
-                <div>
-                  <h6 class="mb-0 fw-bold">{{item.crop_Detail?.crop_name || 'Unknown Crop'}}</h6>
-                  <small class="text-muted">{{item.quantity}} kg • {{item.crop_Detail?.crop_type}}</small>
-                </div>
-              </div>
-            </td>
-            <td>
-              <small class="d-block text-muted">Farmer: <span class="fw-bold text-dark">{{item.farmerid}}</span></small>
-              <small class="d-block text-muted">Dealer: <span class="fw-bold text-dark">{{item.dealerid}}</span></small>
-            </td>
-            <td class="text-end fw-bold text-success">₹{{item.price}}</td>
-            <td class="text-center">
-              <span class="badge rounded-pill bg-success bg-opacity-10 text-success px-3 py-2">
-                {{item.status || 'Completed'}}
-              </span>
-            </td>
-          </tr>
-          <tr *ngIf="Invoice.length === 0">
-            <td colspan="6" class="text-center py-5 text-muted">
-              <i class="bi bi-inbox display-4 d-block mb-3"></i>
-              No invoices found.
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Empty State -->
+    <div *ngIf="Invoice.length === 0" class="empty-state text-center py-5 fade-in">
+      <div class="empty-icon mb-4">
+        <i class="bi bi-receipt-cutoff display-1 text-light"></i>
+      </div>
+      <h3 class="text-secondary">No invoices found</h3>
+      <p class="text-muted">You haven't made any purchases yet.</p>
+      <button routerLink="/Getcrops" class="btn btn-success rounded-pill px-4 mt-3">
+        Start Shopping
+      </button>
+    </div>
+
+    <!-- Invoice List -->
+    <div *ngIf="Invoice.length > 0" class="invoice-list fade-in">
+      <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="bg-light bg-opacity-50">
+              <tr>
+                <th class="ps-4 py-3 text-muted small text-uppercase fw-bold">ID</th>
+                <th class="py-3 text-muted small text-uppercase fw-bold">Date & Time</th>
+                <th class="py-3 text-muted small text-uppercase fw-bold">Items</th>
+                <th class="py-3 text-muted small text-uppercase fw-bold">Total Amount</th>
+                <th class="py-3 text-muted small text-uppercase fw-bold">Payment</th>
+                <th class="py-3 text-muted small text-uppercase fw-bold text-center">Status</th>
+                <th class="pe-4 py-3 text-end text-muted small text-uppercase fw-bold">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inv of Invoice" class="invoice-row">
+                <td class="ps-4">
+                  <span class="fw-bold text-dark small">#{{inv.invoiceid}}</span>
+                </td>
+                <td>
+                  <div class="small text-dark">{{formatDate(inv.date_created)}}</div>
+                </td>
+                <td>
+                  <span class="badge bg-light text-dark fw-normal px-2 py-1">
+                    {{inv.total_items}} {{inv.total_items === 1 ? 'Item' : 'Items'}}
+                  </span>
+                </td>
+                <td>
+                  <span class="fw-bold text-success">₹{{inv.total_amount}}</span>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center small text-muted">
+                    <i class="bi bi-credit-card me-2"></i>
+                    {{inv.payment_mode || 'N/A'}}
+                  </div>
+                </td>
+                <td class="text-center">
+                  <span class="status-badge" [ngClass]="{
+                    'paid': inv.status.toLowerCase() === 'paid' || inv.status.toLowerCase() === 'success',
+                    'pending': inv.status.toLowerCase() === 'pending'
+                  }">
+                    {{inv.status}}
+                  </span>
+                </td>
+                <td class="pe-4 text-end">
+                  <button (click)="viewDetails(inv)" class="btn btn-sm btn-outline-success rounded-pill px-3">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

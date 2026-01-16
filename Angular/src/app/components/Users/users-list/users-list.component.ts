@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
 export class UsersListComponent implements OnInit {
 
   Users: User[] = [];
+  filteredUsers: User[] = [];
+  searchTerm: string = '';
 
   CurrentUser!: User
   constructor(private usersService: UsersService, private auth: AuthService) {
@@ -29,22 +31,31 @@ export class UsersListComponent implements OnInit {
     this.usersService.getallusers().subscribe({
       next: (users) => {
         this.Users = users;
+        this.filteredUsers = users;
 
         this.usersService.GetUserByToken().subscribe({
           next: (user) => {
-            /*   this.CurrentUser = user
-            console.log(this.CurrentUser.roles); */
             this.auth.changeUserState(user);
-
           }
         });
-
       },
       error: (response) => {
         console.log(response);
       }
+    });
+  }
 
-    })
+  onSearch() {
+    if (!this.searchTerm) {
+      this.filteredUsers = this.Users;
+      return;
+    }
+    const term = this.searchTerm.toLowerCase();
+    this.filteredUsers = this.Users.filter(u =>
+      u.name.toLowerCase().includes(term) ||
+      u.email_id.toLowerCase().includes(term) ||
+      u.roles.toLowerCase().includes(term)
+    );
   }
   getRoleClass(role: string): string {
     if (!role) return 'bg-secondary bg-opacity-10 text-secondary';

@@ -47,6 +47,20 @@ export class CartService {
     this.saveCart(currentItems);
   }
 
+  decreaseQuantity(productId: number) {
+    const currentItems = this.cartItems.value;
+    const item = currentItems.find(i => i.cropDetailid === productId);
+
+    if (item) {
+      if (item.quantityInCart > 1) {
+        item.quantityInCart -= 1;
+        this.saveCart([...currentItems]);
+      } else {
+        this.removeFromCart(productId);
+      }
+    }
+  }
+
   getCartCount(): number {
     return this.cartItems.value.reduce((acc, item) => acc + item.quantityInCart, 0);
   }

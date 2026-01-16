@@ -11,6 +11,8 @@ public class UserDto {
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
 
+    private Integer userid;
+
     @NotNull(message = "Password is required")
     private Integer password;
 
@@ -29,6 +31,9 @@ public class UserDto {
 
     @JsonProperty("is_subscribe")
     private Boolean isSubscribe = false;
+
+    @JsonProperty("is_active")
+    private Boolean isActive = false;
 
     // Constructors
     public UserDto() {
@@ -100,5 +105,21 @@ public class UserDto {
 
     public void setIsSubscribe(Boolean isSubscribe) {
         this.isSubscribe = isSubscribe;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 }

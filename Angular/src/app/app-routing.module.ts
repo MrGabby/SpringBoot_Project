@@ -29,6 +29,10 @@ const routes: Routes = [
     component: UsersListComponent
   },
   {
+    path: 'Users/add',
+    component: AddUserComponent
+  },
+  {
     path: 'Users/edit/:id',
     component: EditUserComponent
   },
@@ -104,6 +108,10 @@ const routes: Routes = [
   {
     path: 'Admin/Users',
     component: UsersListComponent
+  },
+  {
+    path: 'Admin/Users/add',
+    component: AddUserComponent
   },
   {
     path: 'Admin/Invoice',

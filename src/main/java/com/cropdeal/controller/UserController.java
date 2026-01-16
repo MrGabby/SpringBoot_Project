@@ -44,13 +44,15 @@ public class UserController {
         List<UserDto> userList = users.stream()
                 .map(user -> {
                     UserDto dto = new UserDto();
+                    dto.setUserid(user.getUserid());
                     dto.setName(user.getName());
                     dto.setPassword(user.getPassword());
                     dto.setEmailId(user.getEmailId());
                     dto.setContact(user.getContact());
                     dto.setAddress(user.getAddress());
                     dto.setRoles(user.getRoles());
-                    dto.setIsSubscribe(user.getIsActive());
+                    dto.setIsSubscribe(user.getIsSubscribe());
+                    dto.setIsActive(user.getIsActive());
                     return dto;
                 })
                 .collect(Collectors.toList());

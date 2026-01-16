@@ -72,7 +72,7 @@ export class WelcomepageComponent implements OnInit, OnDestroy {
           this.router.navigate(['/Invoice']);
           break;
         case 'register':
-          this.router.navigate(['/Register']);
+          this.router.navigate(['/Dealer/GetCrop']);
           break;
         default:
           break;

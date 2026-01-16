@@ -12,31 +12,35 @@ export class AuthService {
   baseUrl: string = environment.baseUrl;
 
 
-  UserState!:User;
+  UserState!: User;
 
-private CurrentUser = new BehaviorSubject<User>(this.UserState);
+  private CurrentUser = new BehaviorSubject<User>(this.UserState);
 
-changeUserState(user: User){
-  this.CurrentUser.next(user);
-}
-
-getCurrentUser(){
-  return this.CurrentUser.asObservable();
-}
-
-
-  constructor(private http: HttpClient) {}
-
-  login(loginObj:any){
-    // const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.post<any>(this.baseUrl + '/api/Auth/login',loginObj);
+  changeUserState(user: User) {
+    this.CurrentUser.next(user);
   }
 
-  setToken(token:string){
+  getUser() {
+    return this.CurrentUser.value;
+  }
+
+  getCurrentUser() {
+    return this.CurrentUser.asObservable();
+  }
+
+
+  constructor(private http: HttpClient) { }
+
+  login(loginObj: any) {
+    // const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    return this.http.post<any>(this.baseUrl + '/api/Auth/login', loginObj);
+  }
+
+  setToken(token: string) {
     localStorage.setItem("token", token);
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem("token");
   }
 

@@ -1,0 +1,50 @@
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(13, 110, 253, 0.2);
+}
+
+.h-line {
+    width: 40px;
+    height: 3px;
+    background: #0d6efd;
+    border-radius: 2px;
+}
+
+.input-group-text {
+    color: #6c757d;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #fff !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1) !important;
+}
+
+.btn-primary-gradient {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    color: white;
+    border: none;
+
+    &:hover {
+        background: linear-gradient(135deg, #0a58ca 0%, #0d6efd 100%);
+        transform: translateY(-2px);
+    }
+}
+
+.bg-primary-gradient {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a21ca 100%);
+}
+
+.bg-danger-gradient {
+    background: linear-gradient(135deg, #dc3545 0%, #b02a37 100%);
+    color: white;
+}
+
+textarea {
+    resize: none;
+}

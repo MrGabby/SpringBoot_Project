@@ -1,38 +1,138 @@
+<div class="container-fluid py-5 fade-in">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="glass-card shadow-lg p-5">
+          <div class="text-center mb-5">
+            <div class="icon-circle bg-primary-gradient text-white mx-auto mb-4">
+              <i class="bi bi-person-plus-fill fs-1"></i>
+            </div>
+            <h2 class="fw-bold gradient-text mb-1">{{ pageTitle }}</h2>
+            <p class="text-muted" *ngIf="pageTitle === 'Add New User'">Create a new system user with specific roles and access</p>
+            <p class="text-muted" *ngIf="pageTitle !== 'Add New User'">Configure a specialized administrative or system account</p>
+            <div class="h-line mx-auto mt-3"></div>
+          </div>
 
-<div class="container my-5">
+          <form #userForm="ngForm" (ngSubmit)="addUser()" class="row g-4">
+            <!-- Full Name -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold small text-uppercase text-muted">Full Name</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-0"><i class="bi bi-person"></i></span>
+                <input type="text" 
+                       name="name" 
+                       [(ngModel)]="newUser.name" 
+                       class="form-control border-0 bg-light" 
+                       placeholder="Enter full name" 
+                       required>
+              </div>
+            </div>
 
-<h1 class="mb-3">Add New User</h1>
+            <!-- Email Address -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold small text-uppercase text-muted">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-0"><i class="bi bi-envelope"></i></span>
+                <input type="email" 
+                       name="email" 
+                       [(ngModel)]="newUser.email_id" 
+                       class="form-control border-0 bg-light" 
+                       placeholder="name@example.com" 
+                       required>
+              </div>
+            </div>
 
-<div class="row">
+            <!-- Contact Number -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold small text-uppercase text-muted">Contact Number</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-0"><i class="bi bi-telephone"></i></span>
+                <input type="text" 
+                       name="contact" 
+                       [(ngModel)]="newUser.contact" 
+                       class="form-control border-0 bg-light" 
+                       placeholder="Enter contact number" 
+                       required>
+              </div>
+            </div>
 
-  <div class="col-6">
-<form >
-  <div class="mb-3">
-    <label for="name" class="form-label">Name</label>
-    <input type="text" class="form-control" id="name" >
+            <!-- Password -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold small text-uppercase text-muted">Password (Numeric)</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-0"><i class="bi bi-lock"></i></span>
+                <input type="number" 
+                       name="password" 
+                       [(ngModel)]="newUser.password" 
+                       class="form-control border-0 bg-light" 
+                       placeholder="Enter numeric password" 
+                       required>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="col-12">
+              <label class="form-label fw-semibold small text-uppercase text-muted">Residence Address</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-0"><i class="bi bi-geo-alt"></i></span>
+                <textarea name="address" 
+                          [(ngModel)]="newUser.address" 
+                          class="form-control border-0 bg-light" 
+                          rows="2" 
+                          placeholder="Enter full address" 
+                          required></textarea>
+              </div>
+            </div>
+
+            <!-- Role & Status -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold small text-uppercase text-muted">Assign Role</label>
+              <select name="role" [(ngModel)]="newUser.roles" class="form-select border-0 bg-light">
+                <option value="Dealer">Dealer (Buyer)</option>
+                <option value="Farmer">Farmer (Seller)</option>
+                <option value="Admin">Administrator</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 d-flex align-items-end">
+              <div class="form-check form-switch mb-2">
+                <input class="form-check-input" 
+                       type="checkbox" 
+                       name="subscribe" 
+                       [(ngModel)]="newUser.is_subscribe" 
+                       id="subscribeCheck">
+                <label class="form-check-label fw-semibold text-muted" for="subscribeCheck">
+                  Subscription Active
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-flex align-items-end">
+              <div class="form-check form-switch mb-2">
+                <input class="form-check-input" 
+                       type="checkbox" 
+                       name="active" 
+                       [(ngModel)]="newUser.is_active" 
+                       id="activeCheck">
+                <label class="form-check-label fw-semibold text-muted" for="activeCheck">
+                  Account Active
+                </label>
+              </div>
+            </div>
+
+            <div class="col-12 mt-5">
+              <div class="d-flex gap-3">
+                <button type="button" routerLink="/Users" class="btn btn-light rounded-pill px-4 flex-grow-1 border">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary-gradient rounded-pill px-5 flex-grow-1 shadow-sm fw-bold">
+                  Create User Account
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="mb-3">
-    <label for="contact" class="form-label">Contact</label>
-    <input type="text" class="form-control" id="contact" >
-  </div>
-  <div class="mb-3">
-    <label for="address" class="form-label">Address</label>
-    <input type="text" class="form-control" id="address" >
-  </div>
-  <div class="mb-3">
-  <label for="email" class="form-label">Email address</label>
-  <input type="email" class="form-control" id="email" placeholder="name@example.com">
-</div>
-<div class="mb-3">
-  <label for="role" class="form-label">Role</label>
-  <input type="text" class="form-control" id="role" >
-</div>
-
-<button class="btn btn-primary" type="submit">Submit</button>
-</form>
-
-  </div>
-</div>
-
-
 </div>

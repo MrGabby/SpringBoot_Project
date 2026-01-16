@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { crop } from 'src/app/models/crop.model';
 import { CropService } from 'src/app/services/crop.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'app-edit-crop',
@@ -28,8 +29,10 @@ export class EditcropComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private cropService: CropService,
-        private router: Router
+        private router: Router,
+        private notification: NotificationService
     ) { }
+
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
@@ -67,13 +70,14 @@ export class EditcropComponent implements OnInit {
     onSubmit() {
         this.cropService.updateCrop(this.id, this.c, this.selectedFile).subscribe({
             next: (res) => {
-                console.log('Update successful', res);
+                this.notification.success('Crop details updated successfully!', 'Update Saved');
                 this.router.navigate(['/Farmer/ManageCrops']);
             },
             error: (err) => {
                 console.error('Update failed', err);
-                alert('Failed to update crop details.');
+                this.notification.error('Failed to update crop details. Please try again.', 'Oops!');
             }
         });
     }
 }
+
