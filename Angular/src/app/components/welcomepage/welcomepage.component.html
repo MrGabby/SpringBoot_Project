@@ -1,77 +1,211 @@
-<div class="hero-section mb-5 position-relative">
-  <div class="position-absolute top-0 start-0 w-100 h-100" style="background-image: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1770&auto=format&fit=crop'); background-size: cover; background-position: center; filter: brightness(0.5); z-index: -1;"></div>
-  <div class="container text-white py-5">
-    <div class="row align-items-center min-vh-50 py-5">
-      <div class="col-lg-8">
-        <h1 class="display-3 fw-bold mb-3 fade-in">Welcome to CropDeal</h1>
-        <p class="lead mb-4 fade-in" style="animation-delay: 0.2s;">The easiest way to connect farmers and dealers. Buy and sell fresh crops directly with transparency.</p>
-        <div class="d-flex gap-3 fade-in" style="animation-delay: 0.4s;">
-          <a routerLink="/Register" class="btn btn-success btn-lg px-5 rounded-pill shadow-lg fw-bold">Get Started</a>
-          <a routerLink="/Login" class="btn btn-outline-light btn-lg px-5 rounded-pill fw-bold">Login</a>
+<!-- Amazon-Style Hero Slider -->
+<div class="hero-slider">
+  <div class="slider-container">
+    <div class="slides-wrapper" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+      <div class="slide" *ngFor="let slide of slides; let i = index">
+        <div class="slide-image" [style.background-image]="'url(' + slide.image + ')'"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-content container">
+          <div class="row align-items-center min-vh-70">
+            <div class="col-lg-8">
+              <h1 class="display-2 fw-bold text-white mb-4 slide-in-left">{{ slide.title }}</h1>
+              <p class="lead text-white mb-5 slide-in-left" style="animation-delay: 0.2s;">{{ slide.subtitle }}</p>
+              <button (click)="handleNavigation(slide.ctaAction)" class="btn btn-success btn-lg px-5 py-3 rounded-pill shadow-lg fw-bold slide-in-left" style="animation-delay: 0.4s;">
+                {{ slide.cta }} <i class="bi bi-arrow-right ms-2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="slider-nav slider-nav-prev" (click)="prevSlide()" aria-label="Previous Slide">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <button class="slider-nav slider-nav-next" (click)="nextSlide()" aria-label="Next Slide">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+
+    <!-- Dot Indicators -->
+    <div class="slider-dots">
+      <button 
+        *ngFor="let slide of slides; let i = index" 
+        class="dot" 
+        [class.active]="i === currentSlide"
+        (click)="goToSlide(i)"
+        [attr.aria-label]="'Go to slide ' + (i + 1)">
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Weather & Live Updates 
+<div class="container mt-n5 position-relative z-index-2">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <app-weather></app-weather>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- Statistics Section -->
+<div class="stats-section py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-6 col-md-3" *ngFor="let stat of stats; let i = index">
+        <div class="stat-card text-center fade-in" [style.animation-delay]="(i * 0.1) + 's'">
+          <i class="bi {{ stat.icon }} stat-icon"></i>
+          <h3 class="stat-number gradient-text mb-2">{{ stat.number }}</h3>
+          <p class="stat-label text-muted mb-0">{{ stat.label }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container mb-5 fade-in">
+<!-- Features Section -->
+<div class="container my-5 py-5">
   <div class="row text-center mb-5">
-    <div class="col-lg-8 mx-auto">
-      <h2 class="fw-bold display-6 text-success">Our Features</h2>
-      <p class="text-muted lead">Everything you need to manage your agricultural business efficiently.</p>
+    <div class="col-lg-8 mx-auto fade-in">
+      <h2 class="fw-bold display-5 mb-3">Why Choose <span class="gradient-text">GrowSmart</span>?</h2>
+      <p class="text-muted lead">Everything you need to manage your agricultural business efficiently and profitably.</p>
     </div>
   </div>
 
   <div class="row g-4">
     <!-- Sell Crops -->
-    <div class="col-md-4">
-      <div class="card feature-card h-100 shadow-sm border-0">
+    <div class="col-md-6 col-lg-4">
+      <div class="card feature-card h-100 border-0">
         <div class="overflow-hidden position-relative">
-           <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1770&auto=format&fit=crop" class="card-img-top" alt="Sell Crops" style="height: 250px; object-fit: cover;">
-           <div class="card-img-overlay bg-dark bg-opacity-25 d-flex align-items-end transition-opacity">
-           </div>
+          <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80" 
+               class="card-img-top" 
+               alt="Sell Crops" 
+               style="height: 280px; object-fit: cover;">
+          <div class="feature-badge">
+            <i class="bi bi-shop"></i>
+          </div>
         </div>
         <div class="card-body d-flex flex-column p-4">
-          <div class="mb-3 text-success">
-            <i class="bi bi-shop display-5"></i>
-          </div>
           <h4 class="card-title fw-bold mb-3">Sell Your Crops</h4>
-          <p class="card-text text-muted mb-4">Reach thousands of dealers and get the best price for your hard work without intermediaries.</p>
-          <button routerLink="/Login" class="btn btn-outline-success w-100 mt-auto rounded-pill fw-bold">Start Selling</button>
+          <p class="card-text text-muted mb-4">Reach thousands of dealers and get the best price for your hard work without intermediaries. Direct connection means better profits.</p>
+          <button (click)="handleNavigation('sell')" class="btn btn-outline-success w-100 mt-auto rounded-pill fw-bold">
+            Start Selling <i class="bi bi-arrow-right ms-2"></i>
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Buy Crops -->
-    <div class="col-md-4">
-      <div class="card feature-card h-100 shadow-sm border-0">
+    <div class="col-md-6 col-lg-4">
+      <div class="card feature-card h-100 border-0">
         <div class="overflow-hidden position-relative">
-           <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=1770&auto=format&fit=crop" class="card-img-top" alt="Buy Crops" style="height: 250px; object-fit: cover;">
+          <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80" 
+               class="card-img-top" 
+               alt="Buy Crops" 
+               style="height: 280px; object-fit: cover;">
+          <div class="feature-badge">
+            <i class="bi bi-cart-check"></i>
+          </div>
         </div>
         <div class="card-body d-flex flex-column p-4">
-           <div class="mb-3 text-success">
-            <i class="bi bi-cart-check display-5"></i>
-          </div>
           <h4 class="card-title fw-bold mb-3">Buy Fresh Crops</h4>
-          <p class="card-text text-muted mb-4">Browse through a wide variety of fresh crops available directly from farmers.</p>
-          <button routerLink="/Login" class="btn btn-outline-success w-100 mt-auto rounded-pill fw-bold">View Listings</button>
+          <p class="card-text text-muted mb-4">Browse through a wide variety of fresh crops available directly from farmers. Quality guaranteed with transparent pricing.</p>
+          <button (click)="handleNavigation('buy')" class="btn btn-outline-success w-100 mt-auto rounded-pill fw-bold">
+            View Listings <i class="bi bi-arrow-right ms-2"></i>
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Manage Invoices -->
-    <div class="col-md-4">
-      <div class="card feature-card h-100 shadow-sm border-0">
+    <div class="col-md-6 col-lg-4">
+      <div class="card feature-card h-100 border-0">
         <div class="overflow-hidden position-relative">
-           <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1770&auto=format&fit=crop" class="card-img-top" alt="Invoices" style="height: 250px; object-fit: cover;">
+          <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80" 
+               class="card-img-top" 
+               alt="Invoices" 
+               style="height: 280px; object-fit: cover;">
+          <div class="feature-badge">
+            <i class="bi bi-file-earmark-text"></i>
+          </div>
         </div>
         <div class="card-body d-flex flex-column p-4">
-           <div class="mb-3 text-success">
-            <i class="bi bi-file-earmark-text display-5"></i>
-          </div>
           <h4 class="card-title fw-bold mb-3">Manage Invoices</h4>
-          <p class="card-text text-muted mb-4">Keep track of all your transactions, generate invoices, and manage finances.</p>
-          <button routerLink="/Invoice" class="btn btn-outline-success w-100 mt-auto rounded-pill fw-bold">Check Invoices</button>
+          <p class="card-text text-muted mb-4">Keep track of all your transactions, generate invoices, and manage finances with our comprehensive invoice system.</p>
+          <button (click)="handleNavigation('invoice')" class="btn btn-outline-success w-100 mt-auto rounded-pill fw-bold">
+            Check Invoices <i class="bi bi-arrow-right ms-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- How It Works Section -->
+<div class="how-it-works-section py-5">
+  <div class="container py-5">
+    <div class="row text-center mb-5">
+      <div class="col-lg-8 mx-auto">
+        <h2 class="fw-bold display-5 text-white mb-3">How It Works</h2>
+        <p class="text-white-50 lead">Simple steps to start your agricultural trading journey</p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="step-card text-center h-100">
+          <div class="step-number">1</div>
+          <i class="bi bi-person-plus step-icon"></i>
+          <h5 class="fw-bold mt-3 mb-2">Register</h5>
+          <p class="text-muted small">Create your account as a farmer or dealer</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="step-card text-center h-100">
+          <div class="step-number">2</div>
+          <i class="bi bi-upload step-icon"></i>
+          <h5 class="fw-bold mt-3 mb-2">List Products</h5>
+          <p class="text-muted small">Upload your crops with details and pricing</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="step-card text-center h-100">
+          <div class="step-number">3</div>
+          <div class="mb-3" style="height: 60px; display: flex; align-items: center; justify-content: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/1006/1006555.png" alt="Connect" style="height: 50px; width: 50px; object-fit: contain;">
+          </div>
+          <h5 class="fw-bold mt-2 mb-2">Connect</h5>
+          <p class="text-muted small">Match with buyers or sellers instantly</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="step-card text-center h-100">
+          <div class="step-number">4</div>
+          <i class="bi bi-check-circle step-icon"></i>
+          <h5 class="fw-bold mt-3 mb-2">Complete Deal</h5>
+          <p class="text-muted small">Finalize transaction with secure invoicing</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Section -->
+<div class="cta-section py-5">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-4 fw-bold text-white mb-4">Ready to Transform Your Agricultural Business?</h2>
+        <p class="lead text-white mb-5">Join thousands of farmers and dealers already using GrowSmart</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+          <a routerLink="/Register" class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-bold">
+            Get Started Free <i class="bi bi-arrow-right ms-2"></i>
+          </a>
+          <a routerLink="/Login" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill fw-bold">
+            Sign In
+          </a>
         </div>
       </div>
     </div>

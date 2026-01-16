@@ -50,7 +50,7 @@ public class UserController {
                     dto.setContact(user.getContact());
                     dto.setAddress(user.getAddress());
                     dto.setRoles(user.getRoles());
-                    dto.setIsSubscribe(user.getIsSubscribe());
+                    dto.setIsSubscribe(user.getIsActive());
                     return dto;
                 })
                 .collect(Collectors.toList());

@@ -12,10 +12,15 @@ export class CropService {
 
   baseUrl: string = environment.baseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  addCrop(c:crop):Observable<crop> {
-    return this.http.post<crop>(this.baseUrl + '/api/Crop_detail',c);
+  addCrop(c: crop, file?: File): Observable<crop> {
+    const formData = new FormData();
+    formData.append('cropDetail', new Blob([JSON.stringify(c)], { type: 'application/json' }));
+    if (file) {
+      formData.append('image', file);
+    }
+    return this.http.post<crop>(this.baseUrl + '/api/Crop_detail', formData);
   }
 
   getAllCrops(): Observable<crop[]> {
@@ -24,5 +29,18 @@ export class CropService {
 
   getCropById(id: number): Observable<crop> {
     return this.http.get<crop>(`${this.baseUrl}/api/Crop_detail/${id}`);
+  }
+
+  updateCrop(id: number, c: crop, file?: File): Observable<crop> {
+    const formData = new FormData();
+    formData.append('cropDetail', new Blob([JSON.stringify(c)], { type: 'application/json' }));
+    if (file) {
+      formData.append('image', file);
+    }
+    return this.http.post<crop>(`${this.baseUrl}/api/Crop_detail/${id}/update`, formData);
+  }
+
+  deleteCrop(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/api/Crop_detail/${id}`);
   }
 }

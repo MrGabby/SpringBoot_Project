@@ -84,6 +84,14 @@
                   <label for="location">Location</label>
                 </div>
               </div>
+              
+              <!-- Image Upload -->
+              <div class="col-12">
+                <div class="mb-4">
+                  <label for="image" class="form-label text-muted">Crop Image</label>
+                  <input type="file" class="form-control" id="image" (change)="onFileSelected($event)" accept="image/*">
+                </div>
+              </div>
 
               <!-- Submit Button -->
               <div class="col-12">

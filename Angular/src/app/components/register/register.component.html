@@ -1,56 +1,173 @@
-<div class="d-flex justify-content-center align-items-center flex-grow-1 my-5">
-  <div class="card shadow-lg register-container">
-    <div class="card-body p-5">
-      <div class="text-center mb-4">
-        <h2 class="fw-bold" style="color: var(--primary-color);">Create Account</h2>
-        <p class="text-muted">Join Crop Deal today.</p>
+<div class="register-page">
+  <div class="register-background"></div>
+  
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100 py-5">
+      <div class="col-lg-9 col-xl-8">
+        <div class="register-card glass-effect">
+          <div class="text-center mb-4 pt-4">
+            <h2 class="fw-bold display-6 gradient-text mb-2">Create Your Account</h2>
+            <p class="text-muted">Join CropDeal and start your agricultural trading journey</p>
+          </div>
+
+          <form #form="ngForm" (ngSubmit)="RegisterUser()" class="p-4 p-md-5 pt-3">
+            <!-- Role Selection Cards -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold mb-3">
+                <i class="bi bi-person-badge me-2"></i>I am a...
+              </label>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <input type="radio" class="btn-check" name="roles" id="roleFarmer" value="Farmer" [(ngModel)]="addUser.roles" required>
+                  <label class="role-card w-100" for="roleFarmer">
+                    <div class="role-icon">
+                      <i class="bi bi-tree-fill"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Farmer</h5>
+                    <p class="small text-muted mb-0">Sell your crops directly to dealers</p>
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <input type="radio" class="btn-check" name="roles" id="roleDealer" value="Dealer" [(ngModel)]="addUser.roles" required>
+                  <label class="role-card w-100" for="roleDealer">
+                    <div class="role-icon">
+                      <i class="bi bi-shop"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Dealer</h5>
+                    <p class="small text-muted mb-0">Buy fresh crops from farmers</p>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label fw-semibold">
+                  <i class="bi bi-person-fill me-2"></i>Full Name
+                </label>
+                <div class="input-wrapper">
+                  <input 
+                    type="text" 
+                    class="form-control modern-input" 
+                    id="name" 
+                    placeholder="John Doe" 
+                    name="name" 
+                    [(ngModel)]="addUser.name" 
+                    required>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="contact" class="form-label fw-semibold">
+                  <i class="bi bi-telephone-fill me-2"></i>Contact Number
+                </label>
+                <div class="input-wrapper">
+                  <input 
+                    type="text" 
+                    class="form-control modern-input" 
+                    id="contact" 
+                    placeholder="1234567890" 
+                    name="contact" 
+                    [(ngModel)]="addUser.contact" 
+                    required>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="email" class="form-label fw-semibold">
+                  <i class="bi bi-envelope-fill me-2"></i>Email Address
+                </label>
+                <div class="input-wrapper">
+                  <input 
+                    type="email" 
+                    class="form-control modern-input" 
+                    id="email" 
+                    placeholder="name@example.com" 
+                    name="email_id" 
+                    [(ngModel)]="addUser.email_id" 
+                    required>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="address" class="form-label fw-semibold">
+                  <i class="bi bi-geo-alt-fill me-2"></i>Address
+                </label>
+                <div class="input-wrapper">
+                  <input 
+                    type="text" 
+                    class="form-control modern-input" 
+                    id="address" 
+                    placeholder="123 Main Street, City, State" 
+                    name="address" 
+                    [(ngModel)]="addUser.address" 
+                    required>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="password" class="form-label fw-semibold">
+                  <i class="bi bi-lock-fill me-2"></i>Password
+                </label>
+                <div class="input-wrapper">
+                  <input 
+                    type="password" 
+                    class="form-control modern-input" 
+                    id="password" 
+                    placeholder="Create a strong password" 
+                    name="password" 
+                    [(ngModel)]="addUser.password" 
+                    required>
+                </div>
+                <small class="text-muted">
+                  <i class="bi bi-info-circle me-1"></i>Use 8+ characters with letters and numbers
+                </small>
+              </div>
+
+              <div class="col-md-6">
+                <label for="confirmPassword" class="form-label fw-semibold">
+                  <i class="bi bi-shield-lock-fill me-2"></i>Confirm Password
+                </label>
+                <div class="input-wrapper">
+                  <input 
+                    type="password" 
+                    class="form-control modern-input" 
+                    id="confirmPassword" 
+                    placeholder="Re-enter your password">
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="form-check mt-4">
+              <input class="form-check-input" type="checkbox" id="terms" required>
+              <label class="form-check-label small text-muted" for="terms">
+                I agree to the <a href="#" class="text-decoration-none" style="color: var(--primary-start);">Terms and Conditions</a> 
+                and <a href="#" class="text-decoration-none" style="color: var(--primary-start);">Privacy Policy</a>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid gap-2 mt-4">
+              <button class="btn btn-primary btn-lg modern-btn" type="submit">
+                Create Account
+                <i class="bi bi-arrow-right ms-2"></i>
+              </button>
+            </div>
+
+            <!-- Login Link -->
+            <div class="text-center mt-4">
+              <p class="text-muted mb-0">
+                Already have an account? 
+                <a routerLink="/Login" class="fw-semibold text-decoration-none" style="color: var(--primary-start);">
+                  Sign In
+                </a>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <form #form="ngForm" (ngSubmit)="RegisterUser()">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="name" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="name" placeholder="John Doe" name="name" [(ngModel)]="addUser.name" required>
-          </div>
-          <div class="col-md-6 mb-3">
-             <label for="contact" class="form-label">Contact Number</label>
-            <input type="text" class="form-control" id="contact" placeholder="1234567890" name="contact" [(ngModel)]="addUser.contact" required>
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="email" class="form-label">Email Address</label>
-          <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email_id" [(ngModel)]="addUser.email_id" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="address" class="form-label">Address</label>
-          <input type="text" class="form-control" id="address" placeholder="123 Main St" name="address" [(ngModel)]="addUser.address" required>
-        </div>
-
-        <div class="row">
-           <div class="col-md-6 mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Create a password" name="password" [(ngModel)]="addUser.password" required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="role" class="form-label">I am a...</label>
-            <select class="form-select" id="role" name="roles" [(ngModel)]="addUser.roles" required>
-              <option value="" disabled selected>Select Role</option>
-              <option value="Farmer">Farmer</option>
-              <option value="Dealer">Dealer</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="d-grid gap-2 mt-4">
-          <button class="btn btn-primary btn-lg" type="submit">Register</button>
-        </div>
-        
-         <div class="text-center mt-3">
-            <p class="small text-muted">Already have an account? <a routerLink="/Login" class="text-decoration-none">Login</a></p>
-         </div>
-      </form>
     </div>
   </div>
 </div>

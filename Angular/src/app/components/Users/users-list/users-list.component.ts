@@ -13,14 +13,15 @@ export class UsersListComponent implements OnInit {
 
   Users: User[] = [];
 
-  CurrentUser!:User
+  CurrentUser!: User
   constructor(private usersService: UsersService, private auth: AuthService) {
 
-    this.auth.getCurrentUser().subscribe({next:(user)=>{
-      this.CurrentUser = user
-      console.log(this.CurrentUser)
-    }
-   });
+    this.auth.getCurrentUser().subscribe({
+      next: (user) => {
+        this.CurrentUser = user
+        console.log(this.CurrentUser)
+      }
+    });
 
   }
   ngOnInit() {
@@ -29,12 +30,14 @@ export class UsersListComponent implements OnInit {
       next: (users) => {
         this.Users = users;
 
-        this.usersService.GetUserByToken().subscribe({next:(user)=>{
-          /*   this.CurrentUser = user
-          console.log(this.CurrentUser.roles); */
-          this.auth.changeUserState(user);
+        this.usersService.GetUserByToken().subscribe({
+          next: (user) => {
+            /*   this.CurrentUser = user
+            console.log(this.CurrentUser.roles); */
+            this.auth.changeUserState(user);
 
-            }});
+          }
+        });
 
       },
       error: (response) => {
@@ -42,5 +45,17 @@ export class UsersListComponent implements OnInit {
       }
 
     })
+  }
+  getRoleClass(role: string): string {
+    if (!role) return 'bg-secondary bg-opacity-10 text-secondary';
+
+    if (role.toLowerCase().includes('admin')) {
+      return 'bg-danger bg-opacity-10 text-danger border border-danger border-opacity-10';
+    } else if (role.toLowerCase().includes('farmer')) {
+      return 'bg-success bg-opacity-10 text-success border border-success border-opacity-10';
+    } else if (role.toLowerCase().includes('dealer')) {
+      return 'bg-info bg-opacity-10 text-info border border-info border-opacity-10';
+    }
+    return 'bg-secondary bg-opacity-10 text-secondary';
   }
 }

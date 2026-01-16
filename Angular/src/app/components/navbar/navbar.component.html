@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--primary-color);">
+<nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container">
     <a class="navbar-brand fw-bold" routerLink="/">
-      Crop Deal
+      GrowSmart
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/welcomepage">Home</a>
+          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/">Home</a>
         </li>
         
         <!-- Guest Links -->
@@ -38,6 +38,14 @@
             <a class="nav-link" routerLinkActive="active" routerLink="/Invoice">Invoice</a>
           </li>
           
+          <li class="nav-item me-3">
+             <a class="nav-link position-relative" routerLink="/Cart">
+               <i class="bi bi-cart3 fs-5"></i>
+               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;" *ngIf="cartCount > 0">
+                 {{cartCount}}
+               </span>
+             </a>
+          </li>
           <li class="nav-item ms-lg-3">
              <button (click)="logout()" class="btn btn-light btn-sm rounded-pill px-3 fw-bold text-success">Logout</button>
           </li>

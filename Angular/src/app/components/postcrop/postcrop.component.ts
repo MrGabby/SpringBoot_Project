@@ -13,31 +13,40 @@ export class PostcropComponent {
 
 
 
-  croptype:any =['Fruits','Vegetables','Pulses']
+  croptype: any = ['Fruits', 'Vegetables', 'Pulses']
 
 
-c: crop = {
-  crop_name:'',
-  crop_family:'',
-  crop_type:'',
-  cropDetailid:0,
-  quantity:0,
-  price:0,
-  cropDetail_description:'',
-  location:''
-};
+  c: crop = {
+    crop_name: '',
+    crop_family: '',
+    crop_type: '',
+    cropDetailid: 0,
+    quantity: 0,
+    price: 0,
+    cropDetail_description: '',
+    location: ''
+  };
 
 
-CropPost(){
-  this.cropService.addCrop(this.c).subscribe({next:(res)=>
-  {
-    console.log(res);
-    alert("Crop added Successfully");
+  selectedFile?: File;
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
-  })
-}
 
-  constructor(private cropService:CropService) { }
+  CropPost() {
+    this.cropService.addCrop(this.c, this.selectedFile).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Failed to add crop");
+      }
+    })
+  }
+
+  constructor(private cropService: CropService) { }
 
   ngOnInit(): void {
 

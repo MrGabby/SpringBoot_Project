@@ -1,5 +1,6 @@
 package com.cropdeal.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ public class UserDto {
 
     @NotBlank(message = "Please enter your email id")
     @Email(message = "Please enter a valid email address")
+    @JsonProperty("email_id")
     private String emailId;
 
     @NotBlank(message = "Please enter your Address")
@@ -25,13 +27,15 @@ public class UserDto {
 
     private String roles = "";
 
+    @JsonProperty("is_subscribe")
     private Boolean isSubscribe = false;
 
     // Constructors
     public UserDto() {
     }
 
-    public UserDto(String name, Integer password, String contact, String emailId, String address, String roles, Boolean isSubscribe) {
+    public UserDto(String name, Integer password, String contact, String emailId, String address, String roles,
+            Boolean isSubscribe) {
         this.name = name;
         this.password = password;
         this.contact = contact;

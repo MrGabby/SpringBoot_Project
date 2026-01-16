@@ -1,0 +1,93 @@
+<div class="container my-5 fade-in">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="row g-0">
+                    <!-- Image Preview Sidebar -->
+                    <div class="col-md-5 bg-light d-flex flex-column align-items-center justify-content-center p-4 border-end">
+                        <h4 class="fw-bold text-success mb-4">Crop Image</h4>
+                        <div class="image-preview-container mb-4 shadow">
+                            <img [src]="imagePreview || 'https://via.placeholder.com/400x400?text=No+Image'" 
+                                 class="img-fluid rounded-3" alt="Image preview">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-muted small mb-3">Upload a fresh image to update the listing appearance.</p>
+                            <label for="imageUpload" class="btn btn-outline-success btn-sm rounded-pill px-4">
+                                <i class="bi bi-camera me-2"></i> Change Image
+                            </label>
+                            <input type="file" id="imageUpload" class="d-none" (change)="onFileSelected($event)" accept="image/*">
+                        </div>
+                    </div>
+
+                    <!-- Form Section -->
+                    <div class="col-md-7 p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2 class="fw-bold gradient-text m-0">Edit Crop Details</h2>
+                            <button class="btn btn-light btn-sm rounded-circle" routerLink="/Farmer/ManageCrops">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+
+                        <div *ngIf="isLoading" class="text-center py-5">
+                            <div class="spinner-border text-success" role="status"></div>
+                        </div>
+
+                        <form *ngIf="!isLoading" (ngSubmit)="onSubmit()" #editForm="ngForm" class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Crop Name</label>
+                                <input type="text" name="crop_name" [(ngModel)]="c.crop_name" class="form-control rounded-3" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Category</label>
+                                <select name="crop_type" [(ngModel)]="c.crop_type" class="form-select rounded-3" required>
+                                    <option *ngFor="let type of croptype" [value]="type">{{type}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Crop Family</label>
+                                <input type="text" name="crop_family" [(ngModel)]="c.crop_family" class="form-control rounded-3">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Location</label>
+                                <input type="text" name="location" [(ngModel)]="c.location" class="form-control rounded-3" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Price (per kg)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">₹</span>
+                                    <input type="number" name="price" [(ngModel)]="c.price" class="form-control border-start-0 rounded-end" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Quantity (kg)</label>
+                                <input type="number" name="quantity" [(ngModel)]="c.quantity" class="form-control rounded-3" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-bold small text-muted">Description</label>
+                                <textarea name="cropDetail_description" [(ngModel)]="c.cropDetail_description" 
+                                    class="form-control rounded-3" rows="4" placeholder="Describe the quality, harvest date, etc..." required></textarea>
+                            </div>
+
+                            <div class="col-12 mt-4">
+                                <div class="d-flex gap-2">
+                                    <button type="submit" [disabled]="!editForm.form.valid" class="btn btn-success btn-lg flex-grow-1 rounded-pill fw-bold shadow-sm">
+                                        Update Listing
+                                    </button>
+                                    <button type="button" routerLink="/Farmer/ManageCrops" class="btn btn-light btn-lg px-4 rounded-pill">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

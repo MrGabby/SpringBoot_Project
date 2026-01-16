@@ -1,0 +1,40 @@
+.weather-container {
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.main-weather-icon {
+    width: 80px;
+    height: 80px;
+    margin-top: -10px;
+}
+
+.current-temp-box {
+    transition: transform 0.3s ease;
+}
+
+.current-temp-box:hover {
+    transform: translateY(-5px);
+}
+
+.forecast-day {
+    min-width: 60px;
+    transition: all 0.2s ease;
+}
+
+.forecast-day:hover {
+    background: #e8f5e9 !important;
+    border-color: #2ecc71 !important;
+}
+
+.prediction-card {
+    border-left: 4px solid #2ecc71 !important;
+}
+
+.forecast-row::-webkit-scrollbar {
+    height: 4px;
+}
+
+.forecast-row::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 10px;
+}

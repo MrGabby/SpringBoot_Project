@@ -27,26 +27,46 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        
+
         final String authHeader = request.getHeader("Authorization");
         String token = null;
         String emailId = null;
+
+        System.out.println("JwtAuthFilter: Processing request: " + request.getRequestURI());
+        System.out.println("JwtAuthFilter: Authorization Header: " + authHeader);
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
             try {
                 emailId = jwtService.extractEmailId(token);
+                System.out.println("JwtAuthFilter: Extracted Email: " + emailId);
             } catch (Exception e) {
-                // Invalid token, continue without authentication
+                System.out.println("JwtAuthFilter: Token extraction failed: " + e.getMessage());
             }
+        } else {
+            System.out.println("JwtAuthFilter: No valid Bearer token found.");
         }
 
         if (emailId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             if (jwtService.validateToken(token)) {
                 var user = userService.getUserByEmailId(emailId);
                 if (user != null) {
+                    // Extract roles and create authorities
+                    // Assuming roles are stored as a comma-separated string, e.g., "Farmer,Admin"
+                    // or just "Farmer"
+                    String roles = user.getRoles();
+                    java.util.List<org.springframework.security.core.authority.SimpleGrantedAuthority> authorities = new java.util.ArrayList<>();
+
+                    if (roles != null && !roles.isEmpty()) {
+                        String[] roleArray = roles.split(",");
+                        for (String role : roleArray) {
+                            authorities.add(new org.springframework.security.core.authority.SimpleGrantedAuthority(
+                                    role.trim()));
+                        }
+                    }
+
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                            user, null, null);
+                            user, null, authorities); // Pass authorities here
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }

@@ -1,4 +1,159 @@
-.t{
-  background-color:#3cb043 ;
-  color: azure;
+// Variables
+$primary-color: #3cb043;
+$hover-bg: #f8f9fa;
+$glass-bg: rgba(255, 255, 255, 0.95);
+$glass-border: 1px solid rgba(255, 255, 255, 0.2);
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.glass-card {
+  background: $glass-bg;
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: $glass-border;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #11998e, #38ef7d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.search-box {
+  position: relative;
+
+  i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  input {
+    min-width: 250px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(60, 176, 67, 0.15);
+      border-color: $primary-color;
+    }
+  }
+}
+
+.modern-table {
+  border-collapse: separate;
+  border-spacing: 0; // Collapsed borders for proper row styling
+
+  thead {
+    th {
+      border: none;
+      letter-spacing: 0.5px;
+      font-size: 0.75rem;
+    }
+  }
+
+  tbody {
+    tr {
+      transition: all 0.2s ease;
+      background-color: transparent; // Ensure row background is transparent initially
+
+      &:hover {
+        background-color: $hover-bg;
+        transform: scale(1.005);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        position: relative;
+        z-index: 1;
+
+        td:first-child {
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+        }
+
+        td:last-child {
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+        }
+      }
+
+      td {
+        border-bottom: 1px solid #f0f0f0;
+        vertical-align: middle;
+        padding: 1rem 0.5rem;
+
+        &:first-child {
+          padding-left: 1.5rem;
+        }
+
+        &:last-child {
+          padding-right: 1.5rem;
+        }
+      }
+
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.user-avatar {
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  padding: 2px;
+  background: #fff;
+
+  img {
+    display: block; // Removes font-size gap
+  }
+}
+
+.role-badge {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.bg-success-gradient {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  color: white;
+  border: none;
+}
+
+.bg-secondary-gradient {
+  background: linear-gradient(135deg, #757f9a, #d7dde8);
+  color: #555;
+  border: none;
+}
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: $primary-color !important;
+    color: white !important;
+    transform: rotate(15deg);
+  }
 }

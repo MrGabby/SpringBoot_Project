@@ -1,29 +1,129 @@
-<div class="d-flex justify-content-center align-items-center flex-grow-1 my-5">
-  <div class="card shadow-lg login-container">
-    <div class="card-body p-5">
-      <div class="text-center mb-4">
-        <h2 class="fw-bold" style="color: var(--primary-color);">Crop Deal</h2>
-        <p class="text-muted">Welcome back! Please login to your account.</p>
-      </div>
-      
-      <form (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-          <label for="userName" class="form-label">Email or Username</label>
-          <input type="text" class="form-control" name="Username" id="userName" placeholder="Enter username" [(ngModel)]="Username" required>
+<div class="login-page">
+  <div class="login-background"></div>
+  
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100 py-5">
+      <div class="col-lg-9 col-xl-7">
+        <div class="login-card glass-effect">
+          <div class="row g-0">
+            <!-- Left Side - Branding -->
+            <div class="col-md-5 login-brand-section d-none d-md-flex">
+              <div class="brand-content text-center">
+                <div class="brand-icon mb-4">
+                  <i class="bi bi-shop-window"></i>
+                </div>
+                <h3 class="text-white fw-bold mb-3">Welcome Back!</h3>
+                <p class="text-white-50">Access your CropDeal account and manage your agricultural business</p>
+                <div class="brand-features mt-4">
+                  <div class="feature-item">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>Secure Transactions</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>Direct Connection</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>Best Prices</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side - Login Form -->
+            <div class="col-md-7 login-form-section">
+              <div class="p-4 p-md-5">
+                <div class="text-center mb-4">
+                  <h2 class="fw-bold gradient-text mb-2">Sign In</h2>
+                  <p class="text-muted">Enter your credentials to continue</p>
+                </div>
+
+                <form (ngSubmit)="onSubmit()">
+                  <div class="mb-4">
+                    <label for="userName" class="form-label fw-semibold">
+                      <i class="bi bi-person-fill me-2"></i>Username or Email
+                    </label>
+                    <div class="input-wrapper">
+                      <input 
+                        type="text" 
+                        class="form-control modern-input" 
+                        name="Username" 
+                        id="userName" 
+                        placeholder="Enter your username" 
+                        [(ngModel)]="Username" 
+                        required>
+                      <span class="input-border"></span>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="pwd" class="form-label fw-semibold">
+                      <i class="bi bi-lock-fill me-2"></i>Password
+                    </label>
+                    <div class="input-wrapper">
+                      <input 
+                        type="password" 
+                        class="form-control modern-input" 
+                        name="password" 
+                        id="pwd" 
+                        placeholder="Enter your password" 
+                        [(ngModel)]="password" 
+                        required>
+                      <span class="input-border"></span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="rememberMe">
+                      <label class="form-check-label small text-muted" for="rememberMe">
+                        Remember me
+                      </label>
+                    </div>
+                    <a href="#" class="small text-decoration-none" style="color: var(--primary-start);">
+                      Forgot Password?
+                    </a>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-primary btn-lg modern-btn" type="submit">
+                      Sign In
+                      <i class="bi bi-arrow-right ms-2"></i>
+                    </button>
+                  </div>
+                </form>
+
+                <div class="text-center mt-4">
+                  <p class="text-muted mb-0">
+                    Don't have an account? 
+                    <a routerLink="/Register" class="fw-semibold text-decoration-none" style="color: var(--primary-start);">
+                      Create Account
+                    </a>
+                  </p>
+                </div>
+
+                <!-- Social Login (Visual Only) -->
+                <div class="social-divider my-4">
+                  <span class="text-muted small">Or continue with</span>
+                </div>
+
+                <div class="row g-2">
+                  <div class="col-6">
+                    <button type="button" class="btn btn-outline-secondary w-100 social-btn">
+                      <i class="bi bi-google me-2"></i>Google
+                    </button>
+                  </div>
+                  <div class="col-6">
+                    <button type="button" class="btn btn-outline-secondary w-100 social-btn">
+                      <i class="bi bi-facebook me-2"></i>Facebook
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div class="mb-3">
-          <label for="pwd" class="form-label">Password</label>
-          <input type="password" class="form-control" name="password" id="pwd" placeholder="Enter password" [(ngModel)]="password" required>
-        </div>
-        
-        <div class="d-grid gap-2 mt-4">
-          <button class="btn btn-primary btn-lg" type="submit">Login</button>
-        </div>
-      </form>
-      
-      <div class="text-center mt-4">
-        <p class="small text-muted">Don't have an account? <a routerLink="/Register" class="text-decoration-none">Sign Up</a></p>
       </div>
     </div>
   </div>

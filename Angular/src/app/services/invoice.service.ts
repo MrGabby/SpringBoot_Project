@@ -12,11 +12,14 @@ export class InvoiceService {
 
   baseUrl: string = environment.baseUrl;
 
-constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-getinvoice():Observable<invoice[]>  {
-  return this.http.get<invoice[]>(this.baseUrl + '/api/Invoice');
+  getinvoice(): Observable<invoice[]> {
+    return this.http.get<invoice[]>(this.baseUrl + '/api/Invoice');
+  }
 
-}
+  createInvoice(i: invoice): Observable<invoice> {
+    return this.http.post<invoice>(this.baseUrl + '/api/Invoice', i);
+  }
 
 }

@@ -1,0 +1,49 @@
+.manage-card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+}
+
+.manage-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.category-header {
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    font-weight: 700;
+}
+
+.category-icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.category-icon.fruits {
+    background: #ff4d4d;
+}
+
+.category-icon.vegetables {
+    background: #2ecc71;
+}
+
+.category-icon.pulses {
+    background: #f39c12;
+}
+
+.category-icon.grains {
+    background: #3498db;
+}
+
+.category-icon.others {
+    background: #95a5a6;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

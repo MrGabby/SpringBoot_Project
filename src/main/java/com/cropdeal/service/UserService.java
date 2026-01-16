@@ -38,10 +38,19 @@ public class UserService {
         user.setAddress(userDto.getAddress());
         user.setRoles(userDto.getRoles());
         user.setIsSubscribe(userDto.getIsSubscribe());
+        user.setIsActive(true); // Set active by default on registration
         return user;
     }
 
     public User getUserByEmailId(String emailId) {
         return userRepository.findByEmailId(emailId);
+    }
+
+    public User getUserByEmailIdOrName(String identifier) {
+        User user = userRepository.findByEmailId(identifier);
+        if (user == null) {
+            user = userRepository.findByName(identifier);
+        }
+        return user;
     }
 }

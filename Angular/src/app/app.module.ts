@@ -22,6 +22,12 @@ import { DealerComponent } from './components/dealer/dealer.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { PostcropComponent } from './components/postcrop/postcrop.component';
 import { GetcropComponent } from './components/getcrop/getcrop.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+import { ManageCropsComponent } from './components/manage-crops/manage-crops.component';
+import { EditcropComponent } from './components/edit-crop/edit-crop.component';
+import { WeatherComponent } from './components/weather/weather.component';
 
 
 @NgModule({
@@ -31,7 +37,6 @@ import { GetcropComponent } from './components/getcrop/getcrop.component';
     AddUserComponent,
     RegisterComponent,
     LoginComponent,
-    WelcomepageComponent,
     WelcomepageComponent,
     FooterComponent,
     EditUserComponent,
@@ -45,7 +50,11 @@ import { GetcropComponent } from './components/getcrop/getcrop.component';
     AdminComponent,
     PostcropComponent,
     GetcropComponent,
-   // PostcComponent,
+    CheckoutComponent,
+    ManageCropsComponent,
+    EditcropComponent,
+    WeatherComponent,
+    // PostcComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +62,9 @@ import { GetcropComponent } from './components/getcrop/getcrop.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

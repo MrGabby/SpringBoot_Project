@@ -1,10 +1,11 @@
-export interface crop{
-  cropDetailid:number;
+export interface crop {
+  cropDetailid: number;
   crop_name: string;
   crop_family: string;
   crop_type: string;
   quantity: number;
-  price:number;
-  cropDetail_description:string;
-  location:string;
+  price: number;
+  cropDetail_description: string;
+  location: string;
+  imageUrl?: string;
 }
